@@ -5,8 +5,9 @@ using UnityEngine.UI;
 public class EnemyController : MonoBehaviour
 {
     [Header("Path")]
-    [SerializeField] List<Transform> pathPoints;
+    [SerializeField] public List<Transform> pathPoints;
     private int currentPointIndex = 0;
+    private Transform startingPosition;
 
     [Header("Movement")]
     [SerializeField] float speed = 2f;
@@ -18,16 +19,25 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Image lifeBar;
 
     [Header("Damage")]
-    [SerializeField] int damageToPlayer = 1;
+    [SerializeField] public int damageToPlayer = 1;
 
     [Header("Graphics")]
     [SerializeField] SpriteRenderer graphicsObject;
-
-    // TODO: Modificare lo script in modo che si usi il RigidBody2D per il movimento invece che transform.position
-
+    [Header("Value")]
+    [SerializeField] int ScrapValue = 50;
+    // DONE: Utilizza rb.linearvelocity e incrementata drasticamente la velocità
+    private Rigidbody2D rb;
+    private GameManager gameManager;
     private void Start()
     {
         currentHealth = maxHealth;
+        startingPosition = GameObject.Find("EnemySpawnPoint - FACTORY").transform;
+        gameManager = FindAnyObjectByType<GameManager>();
+        if (startingPosition == null) Debug.LogWarning("There is no startingPosition");
+    }
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -42,7 +52,7 @@ public class EnemyController : MonoBehaviour
         Vector3 targetPoint = pathPoints[currentPointIndex].position;
         Vector3 direction = (targetPoint - transform.position).normalized;
 
-        transform.position += direction * speed * Time.deltaTime;
+        rb.linearVelocity = direction * speed * Time.deltaTime;
 
         UpdateGraphicsRotation(direction);
 
@@ -90,14 +100,23 @@ public class EnemyController : MonoBehaviour
         graphicsObject.transform.localEulerAngles = new Vector3(0f, 0f, angle);
     }
 
-
-
-    private void ReachExit()
+    public void ReachExit()
     {
-        // TODO: In che modo possiamo togliere la vita alla Base del giocatore senza avere un riferimento diretto?
-        Die();
+        Vector3 startingPos = startingPosition.position;
+        if (startingPos == null) { Debug.Log("there is no starting position"); return; }
+        transform.position = startingPos;
+        currentHealth = maxHealth;
+        currentPointIndex = 0;
     }
-
+    public void OnDeath()
+    {
+        gameManager.AddCoins(ScrapValue);
+        Vector3 startingPos = startingPosition.position;
+        if (startingPos == null) { Debug.Log("there is no starting position"); return; }
+        transform.position = startingPos;
+        currentHealth = maxHealth;
+        currentPointIndex = 0;
+    }
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
@@ -112,7 +131,9 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        // TODO: Si potrebbe fare di meglio? Come possiamo non eliminare l'oggetto e usarlo in un altro modo?
-        Destroy(gameObject);
+        // DONE: Invece di eliminarlo ritorna nella posizione iniziale
+        // TODO: logica per Abilitare e disabilitare Nemici
+        OnDeath();
+        //Destroy(gameObject);
     }
 }

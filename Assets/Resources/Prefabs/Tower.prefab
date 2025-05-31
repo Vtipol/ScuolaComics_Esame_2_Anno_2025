@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 2
   fireRate: 1
-  projectileSpeed: 1000
+  projectileSpeed: 3000
   cannonGraphics: {fileID: 2887825084856791242}
   firePoint: {fileID: 408199583184931185}
   projectilePrefab: {fileID: 6511734976158796608, guid: abb6f8dc185a8804e87ff4f1c0e44657, type: 3}

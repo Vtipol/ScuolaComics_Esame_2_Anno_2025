@@ -265,9 +265,9 @@ GameObject:
   - component: {fileID: 7042819931008691165}
   - component: {fileID: 717274828804270328}
   - component: {fileID: 1799816837422851489}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  speed: 2
+  speed: 1000
   maxHealth: 5
   currentHealth: 0
   canvasLife: {fileID: 8756599401049789056}
@@ -376,11 +376,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 9341fceb3c06f9944a4267166081db9f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

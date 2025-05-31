@@ -8,6 +8,7 @@ public class Damager : MonoBehaviour
         if (collision.TryGetComponent(out EnemyController enemyController))
         {
             enemyController.TakeDamage(damageAmount);
+            Destroy(gameObject); 
         }
     }
 }
