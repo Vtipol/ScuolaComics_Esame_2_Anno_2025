@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -135,5 +136,10 @@ public class EnemyController : MonoBehaviour
         // TODO: logica per Abilitare e disabilitare Nemici
         OnDeath();
         //Destroy(gameObject);
+    }
+
+    internal void Initialize(Path path)
+    {
+        pathPoints = new List<Transform>(path.GetComponentsInChildren<Transform>());
     }
 }

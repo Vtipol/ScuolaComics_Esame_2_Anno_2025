@@ -9,7 +9,8 @@ public class GameManager : Singleton<GameManager>
 {
     [Header("Monete del giocatore")]
     [SerializeField] private int startingCoins = 100;
-    private GameObject Enemy;
+    public GameObject Enemy;
+    public Path path;
     private EnemyController enemyController;
     private UIManager UImanager;
     //private List<Transform> Paths;
@@ -31,32 +32,33 @@ public class GameManager : Singleton<GameManager>
     }
     private void GetEnemies() // funzione per trovare enemy se non già instanziati in scena
     {
-        Enemy = GameObject.Find("Enemy"); // ha bisogno di un nemico già instanziato
-       // Path = GameObject.Find("Path");
-        if (Enemy == null  /* Path != null*/)
-        {
-            GameObject enemyPrefab = Resources.Load<GameObject>("Prefabs/Enemy");
-            if (enemyPrefab != null)
-            {
-                Enemy = enemyPrefab;
-                Enemy.name = "Enemy";
-               // enemyController = FindAnyObjectByType<EnemyController>();
-            }
-            else Debug.LogError("Enemy Was not Found");
-        }
-        enemyController = Enemy.GetComponent<EnemyController>();
-       /* if (Path == null) // rimosso a causa di mancanza di tempo
-        {
-            Debug.LogWarning("there is no Path in the current scene");
-        }
-        else
-        {
-            foreach (Transform Child in Path.transform)
-            {
-                Paths.Add(Child);
-            }
-            enemyController.pathPoints = Paths;
-        }*/
+       // Enemy = GameObject.Find("Enemy"); // ha bisogno di un nemico già instanziato
+       //// Path = GameObject.Find("Path");
+       // if (Enemy == null  /* Path != null*/)
+       // {
+       //     GameObject enemyPrefab = Resources.Load<GameObject>("Prefabs/Enemy");
+       //     if (enemyPrefab != null)
+       //     {
+       //         Enemy = enemyPrefab;
+       //         Enemy.name = "Enemy";
+       //        // enemyController = FindAnyObjectByType<EnemyController>();
+       //     }
+       //     else Debug.LogError("Enemy Was not Found");
+       // }
+        enemyController = Instantiate(Enemy).GetComponent<EnemyController>();
+        enemyController.Initialize(path);
+        /* if (Path == null) // rimosso a causa di mancanza di tempo
+         {
+             Debug.LogWarning("there is no Path in the current scene");
+         }
+         else
+         {
+             foreach (Transform Child in Path.transform)
+             {
+                 Paths.Add(Child);
+             }
+             enemyController.pathPoints = Paths;
+         }*/
     }
     public void AddCoins(int amount)
     {

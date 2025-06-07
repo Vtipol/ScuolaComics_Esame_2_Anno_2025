@@ -9,7 +9,7 @@ public class BaseProjectile : MonoBehaviour
     [SerializeField] private float LifeTime = 5f;
     private void Start()
     {
-        ProjectileLife();
+        StartCoroutine(ProjectileLife());
     }
     private IEnumerator ProjectileLife()
     {

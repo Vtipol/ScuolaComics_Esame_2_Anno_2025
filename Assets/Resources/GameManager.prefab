@@ -45,3 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingCoins: 200
+  Enemy: {fileID: 2106556985664208987, guid: fceb4782ca7213143b1d19c7e4fe54b9, type: 3}
+  path: {fileID: 0}
