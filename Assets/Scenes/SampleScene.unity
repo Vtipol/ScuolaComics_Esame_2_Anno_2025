@@ -5242,6 +5242,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3775786137082985199, guid: 3c55948802823844883c64c40fbc1468, type: 3}
+      propertyPath: enemyController
+      value: 
+      objectReference: {fileID: 717274828804270328, guid: fceb4782ca7213143b1d19c7e4fe54b9, type: 3}
     - target: {fileID: 6893570196826955524, guid: 3c55948802823844883c64c40fbc1468, type: 3}
       propertyPath: m_Name
       value: PlayerBase

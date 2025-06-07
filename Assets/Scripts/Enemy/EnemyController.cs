@@ -141,5 +141,6 @@ public class EnemyController : MonoBehaviour
     internal void Initialize(Path path)
     {
         pathPoints = new List<Transform>(path.GetComponentsInChildren<Transform>());
+        pathPoints.RemoveAt(0);
     }
 }
